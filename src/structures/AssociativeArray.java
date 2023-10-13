@@ -236,24 +236,34 @@ public class AssociativeArray<K, V> {
    */
   @SuppressWarnings({"unchecked"})
   public K[] getKeys(){
-    // if there are no KVPairs, return null
+    //if there are no KVPairs, return null
     if(this.pairs.length == 0){
+      System.err.println("no KVpairs");
       return null;
     } // if
 
-    // creating a generic array the same way as in the constructor
+    try{
+      // creating a generic array the same way as in the constructor
     K[] keys = (K[]) newInstance((this.pairs[0].key).getClass(),
         this.pairs.length);
 
     // go through pairs and add each key to the array
-    for(int i = 0; i < this.pairs.length; i++){
+    //System.err.println(this.size());
+    for(int i = 0; i < this.size(); i++){
       if(this.pairs[i].key != null){
         keys[i] = this.pairs[i].key;
       } // if
     } // for
-
+  
     // return an array of all the keys
     return keys;
+    
+    } catch (Exception e) {
+      System.err.println("Error in getKeys");
+      return null;
+    }
+
+
   } // getKeys()
 
 } // class AssociativeArray

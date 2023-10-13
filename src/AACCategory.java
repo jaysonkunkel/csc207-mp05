@@ -7,7 +7,6 @@ import structures.KeyNotFoundException;
  */
 public class AACCategory {
   
-  //String imagePath;
   String name;
   AssociativeArray<String, String> aa;
 
@@ -18,6 +17,7 @@ public class AACCategory {
    */
   public AACCategory(String name){
     this.name = name;
+    this.aa = new AssociativeArray<String, String>();
   } // AAACategory (String)
 
   /**
@@ -46,10 +46,18 @@ public class AACCategory {
    * @return the array of image locations
    */
   public String[] getImages() throws Exception{
-    if(this.aa.getKeys() == null){
-      throw new Exception("No images in the category");
+    // if(this.aa.getKeys() == null){
+    //   throw new Exception("No images in the category");
+    // }
+
+    // return this.aa.getKeys();
+
+    try {
+      return this.aa.getKeys();
+    } catch (Exception e) {
+      System.err.println("Unable to get images.");
+      return new String[] {"img/clothing/cap.png"};
     }
-    return this.aa.getKeys();
   } // getImages()
 
   /**
