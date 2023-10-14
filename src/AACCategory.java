@@ -7,7 +7,10 @@ import structures.KeyNotFoundException;
  */
 public class AACCategory {
   
+  // holds the name of the category
   String name;
+
+  // holds the image locations and names of subcategories
   AssociativeArray<String, String> aa;
 
   /**
@@ -46,17 +49,17 @@ public class AACCategory {
    * @return the array of image locations
    */
   public String[] getImages() throws Exception{
-    // if(this.aa.getKeys() == null){
-    //   throw new Exception("No images in the category");
-    // }
 
-    // return this.aa.getKeys();
+    if(this.aa.getKeys() == null){
+      return new String[] {""};
+    }
 
     try {
+      // get keys from this category
       return this.aa.getKeys();
     } catch (Exception e) {
-      System.err.println("Unable to get images.");
-      return new String[] {"img/clothing/cap.png"};
+      System.err.println("Error: unable to get images");
+      return new String[] {""};
     }
   } // getImages()
 
@@ -68,7 +71,13 @@ public class AACCategory {
    * @return the text associated with the image
    */
   public String getText(String imageLoc) throws KeyNotFoundException{
-    return this.aa.get(imageLoc);
+    try {
+      // get text associated with image
+      return this.aa.get(imageLoc);
+    } catch (Exception e) {
+      System.err.println("Error: unable to get text");
+      return "";
+    }
   } // getText(String)
 
   /**

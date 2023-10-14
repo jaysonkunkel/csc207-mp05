@@ -117,12 +117,12 @@ public class AssociativeArray<K, V> {
           foundNull = true;
         } // if
         // if given key already exists, set that index to given KV pair
-        if(this.pairs[i] != null && this.pairs[i].key.equals(key) && !foundDup){
-          foundDup = true;
-          this.pairs[i].key = key;
-          this.pairs[i].value = value;
-          size++;  
-        } // if
+        // if(this.pairs[i] != null && this.pairs[i].key.equals(key) && !foundDup){
+        //   foundDup = true;
+        //   this.pairs[i].key = key;
+        //   this.pairs[i].value = value;
+        //   size++;  
+        // } // if
       } // for
 
       //if an existing key wasnt found, set given KV pair at first null index
@@ -132,6 +132,41 @@ public class AssociativeArray<K, V> {
       } // if
     } // else
   } // set(K,V)
+
+  // /**
+  //  * Set the value associated with key to value. Future calls to
+  //  * get(key) will return value.
+  //  */
+  // public void set(K key, V value) {
+  //   // if the array is full, expand it, set desired KV pair at first open index
+  //   if(this.isFull() && !this.hasKey(key)){
+  //     this.expand();
+  //     // this.pairs[++this.size].key = key;
+  //     // this.pairs[this.size].value = value;
+  //     this.size++;
+  //     this.pairs[size] = new KVPair<K,V> (key, value);
+  //   } // if
+  //   else{
+  //     // search for the first null index or existing key, and set given KV pair
+  //     int firstNull = 0;
+  //     boolean foundNull = false;
+  //     boolean foundDup = false;
+
+  //     for(int i = 0; i < this.pairs.length; i++){
+  //       // check for null index and keep track of it
+  //       if(this.pairs[i] == null && !foundNull){
+  //         firstNull = i;
+  //         foundNull = true;
+  //       } // if
+  //       // if given key already exists, set that index to given KV pair
+  //       if(this.pairs[i] != null && this.pairs[i].key.equals(key) && !foundDup){
+  //         foundDup = true;
+  //         this.pairs[i].key = key;
+  //         this.pairs[i].value = value;
+  //         size++;  
+  //       } // if
+  //     } // for
+
 
   /**
    * Get the value associated with key.
@@ -244,26 +279,24 @@ public class AssociativeArray<K, V> {
 
     try{
       // creating a generic array the same way as in the constructor
-    K[] keys = (K[]) newInstance((this.pairs[0].key).getClass(),
+      K[] keys = (K[]) newInstance((this.pairs[0].key).getClass(),
         this.pairs.length);
 
-    // go through pairs and add each key to the array
-    //System.err.println(this.size());
-    for(int i = 0; i < this.size(); i++){
-      if(this.pairs[i].key != null){
-        keys[i] = this.pairs[i].key;
-      } // if
-    } // for
+      // go through pairs and add each key to the array
+      //System.err.println(this.size());
+      for(int i = 0; i < this.size(); i++){
+        if(this.pairs[i].key != null){
+          keys[i] = this.pairs[i].key;
+        } // if
+      } // for
   
-    // return an array of all the keys
-    return keys;
+      // return an array of all the keys
+      return keys;
     
     } catch (Exception e) {
-      System.err.println("Error in getKeys");
+      System.err.println("Error: could not get keys");
       return null;
     }
-
-
   } // getKeys()
 
 } // class AssociativeArray
